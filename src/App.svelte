@@ -1,4 +1,5 @@
 <script>
+  import Slider from "./Slider.svelte";
   let product = {
     id: "svelte-book",
     name: "Svelte Guide",
@@ -67,53 +68,53 @@
 <article class="product">
   <div class="product-main">
     <div class="image-container">
-      <div class="slider">
-        <img
-          src={product.images[sliderLeftIndex]}
-          alt="スライダー画像(左)"
-          class="slider-item-left"
-        />
-        <img
-          src={product.images[sliderCenterIndex]}
-          alt="スライダー画像"
-          class="slider-item"
-        />
-        <img
-          src={product.images[sliderRightIndex]}
-          alt="スライダー画像(右)"
-          class="slider-item-right"
-        />
-        <button class="slider-left-button" on:click={sliderMoveLeft} />
-        <button class="slider-right-button" on:click={sliderMoveRight} />
-      </div>
+      <!-- <div class="slider"> -->
+      <Slider images={product.images} />
+      <img
+        src={product.images[sliderLeftIndex]}
+        alt="スライダー画像(左)"
+        class="slider-item-left"
+      />
+      <img
+        src={product.images[sliderCenterIndex]}
+        alt="スライダー画像"
+        class="slider-item"
+      />
+      <img
+        src={product.images[sliderRightIndex]}
+        alt="スライダー画像(右)"
+        class="slider-item-right"
+      />
+      <button class="slider-left-button" on:click={sliderMoveLeft} />
+      <button class="slider-right-button" on:click={sliderMoveRight} />
     </div>
-    <div>
-      <h2>{product.name}</h2>
-      <dl>
-        <dt>価格</dt>
-        <dd>{product.price}円</dd>
-      </dl>
-      <div>
-        {#if !cart.includes("svelte-book")}
-          <button on:click={() => addToCart("svelte-book")}
-            >カートに入れる</button
-          >
-        {:else}
-          <button disabled>カート追加済み</button>
-        {/if}
-      </div>
-    </div>
-    <footer>
-      <h3>関連商品</h3>
-      <ul>
-        {#each relatedProducts as product}
-          <li>
-            <a href="/products/{product.id}">{product.name}</a>
-          </li>
-        {/each}
-      </ul>
-    </footer>
   </div>
+  <div>
+    <h2>{product.name}</h2>
+    <dl>
+      <dt>価格</dt>
+      <dd>{product.price}円</dd>
+    </dl>
+    <div>
+      {#if !cart.includes("svelte-book")}
+        <button on:click={() => addToCart("svelte-book")}>カートに入れる</button
+        >
+      {:else}
+        <button disabled>カート追加済み</button>
+      {/if}
+    </div>
+  </div>
+  <footer>
+    <h3>関連商品</h3>
+    <ul>
+      {#each relatedProducts as product}
+        <li>
+          <a href="/products/{product.id}">{product.name}</a>
+        </li>
+      {/each}
+    </ul>
+  </footer>
+  <!-- </div> -->
 </article>
 
 <style>
